@@ -1,0 +1,38 @@
+    .section .data
+path:
+    .string "./assets/data"
+buffer:
+    .byte 0
+
+    .section .text
+    .globl _start
+
+_start:
+    # open(path, O_RDONLY)
+    mov $2, %rax                 # syscall: open
+    lea path(%rip), %rdi         # filename pointer
+    xor %rsi, %rsi               # flags = O_RDONLY
+    syscall
+    mov %rax, %r12               # save file descriptor
+
+    # read(fd, buffer, 1)
+    mov $0, %rax                 # syscall: read
+    mov %r12, %rdi               # fd
+    lea buffer(%rip), %rsi       # destination
+    mov $1, %rdx                 # number of bytes
+    syscall
+
+    # increment the byte
+    incb buffer(%rip)
+
+    # write(1, buffer, 1)
+    mov $1, %rax                 # syscall: write
+    mov $1, %rdi                 # stdout
+    lea buffer(%rip), %rsi       # source
+    mov $1, %rdx                 # number of bytes
+    syscall
+
+    # exit(0)
+    mov $60, %rax
+    xor %rdi, %rdi
+    syscall
