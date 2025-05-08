@@ -46,8 +46,8 @@ path:
 buffer:
     .byte 0
 
-    .section .text
-    .globl _start
+.section .text
+.globl _start
 
 _start:
     # open(path, O_RDONLY)
