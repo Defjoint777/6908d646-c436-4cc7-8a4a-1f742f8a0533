@@ -1,4 +1,4 @@
-<!---
+rm da<!---
 {
   "depends_on": ["https://github.com/STEMgraph/e3a451cf-dccf-474b-97d2-17505e309ba0"],
   "author": "Stephan Bökelmann",
@@ -96,10 +96,15 @@ Ensure that the file `./assets/data` exists and contains **exactly one character
 ## 3) Questions
 
 1. What does the `open` syscall return? Why do we store it in `%r12`?
-2. Why is `O_RDONLY` represented as `0`?
-3. How would you modify the loop to increment multiple bytes?
-4. What if the file doesn't exist — how does the system respond?
-5. What's different about incrementing ASCII `'A'` vs `'9'`?
+   we store it in %r12 to dont overrite it with syscall so the %r12 can be used by read.
+3. Why is `O_RDONLY` represented as `0`?
+   cuz readonly only opens the file to read like 0 is doing.
+4. How would you modify the loop to increment multiple bytes?
+   while buffer.length != messege.length {buffer ++:}
+5. What if the file doesn't exist — how does the system respond?
+   No respond at all
+7. What's different about incrementing ASCII `'A'` vs `'9'`?
+   a = 01100001 = 97  b = 01100010 (+1 bit)  9 = 00111001 = 57  : = 58 =00111010 its all about ASCII
 
 <details>
   <summary>Hint: ASCII Table</summary>
